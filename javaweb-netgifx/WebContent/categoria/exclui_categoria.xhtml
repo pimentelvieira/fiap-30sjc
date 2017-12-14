@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html">
+	<h:head>
+		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+		<title>Cadastro de Categorias</title>
+	</h:head>
+	<h:body>
+		<h:form>
+			<h:commandLink action="/home/index.xhtml?faces-redirect=true" value="Home" />
+			<br/>
+			<h1>Cadastro de Categorias</h1>
+			<h:panelGrid columns="1">
+				<h:outputLabel value="Nome:" for="nome" />
+				<h:inputText value="#{categoriaBean.categoria.nome}" id="nome"/>
+				<h:commandButton action="#{categoriaBean.excluir}" value="Excluir"/>
+			</h:panelGrid>
+			<br/>
+			<h:commandLink action="/categoria/cadastro_categoria.xhtml?faces-redirect=true" value="Voltar" />
+		</h:form>
+	</h:body>
+</html>
