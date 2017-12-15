@@ -5,18 +5,23 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>CADASTRAR GIF</title>
+<title>NETGIFS - ADM</title>
 </head>
 <body>
 	<p>${mensagem}</p>
-	<h1>CADASTRAR GIF</h1>
-	<form action=<c:url value="/cadastrarGif"/> method="post">
+	<h1>NETGIFS - ADM</h1>
+	<a	href="${pageContext.request.contextPath}/homeAdm">Home</a>	<br><br><br>
+		<form action=<c:url value="/cadastrarGif"/>
+		method="post" > 
 		nome do gif: <input type="text" name="nomeGif"> <br>
 		descricao: <input type="text" name="desc"><br> 
 		categoria: <input	type="text" name="categoria"> <br> 
 		idioma: <input	type="text" name="idioma"> <br> 
-		classificação etaria: <input type="text" name="clsItr"> <br> <input type="submit">
+		link: <input	type="text" name="link"> <br> 
+		classificação etaria: <input type="text" name="clsItr"> 
+	 <input type="submit">
 	</form>
+
 	<br>
 	<br>
 	<h1>CADASTRAR USUARIO</h1>
@@ -39,7 +44,7 @@
 	</form>
 	<br></br>
 	
-	<a	href="${pageContext.request.contextPath}/home">Home</a>	<br><br><br>
+	
 </body>
 </html>
 

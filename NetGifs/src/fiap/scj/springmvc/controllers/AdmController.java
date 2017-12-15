@@ -2,6 +2,7 @@ package fiap.scj.springmvc.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -17,14 +18,20 @@ public class AdmController {
 		return "formAdm";		
 	}
 	
+	@RequestMapping(value = "/homeAdm", method = RequestMethod.GET)
+	public String exibirFormAdm(Model m, Gif gif, Usuario usuario) {
+		m.addAttribute("gifs", usuario);
+		return "homeAdm";		
+	}
+		
+	
 	@RequestMapping(value = "/cadastrarGif", method = RequestMethod.POST)
-	public String Cadastrar(Model m, Gif gif, Usuario usuario) {
-		usuario.getGifs().add(gif);
+	public String exibirFormulario(Model m,Usuario usuario,Gif gif)	{	
 		m.addAttribute("mensagem", "Gif "+ gif.getNomeGif() +" cadastrado com sucesso");
 		m.addAttribute("gifs", usuario);
-		return "formAdm";		
+		return "formAdm";	
 	}
-	
+		
 	@RequestMapping(value = "/cadastroUsuario", method = RequestMethod.POST)
 	public String cadastroUsuario(Model m, Gif gif, Usuario usuario) {
 		//new usuario....

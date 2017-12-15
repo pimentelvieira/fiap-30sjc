@@ -12,7 +12,7 @@
 	<form action=<c:url value="/login"/>
 		method="post">
 		login: <input type="text" name="login">
-		senha: <input type="text" name="senha">
+		senha: <input type="password" name="senha">
 	 <input type="submit">
 	</form>
 	
