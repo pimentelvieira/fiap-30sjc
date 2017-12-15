@@ -11,7 +11,9 @@
 <body>
 	<h1>NETGIFS</h1>
 	<h1>FAVORITOS</h1>
-	<a href="${pageContext.request.contextPath}/adm">Mais opções</a>
+	<a href="<c:url value="/categoria"/>">Categorias</a>
+	<br>
+	<a href="<c:url value="/usuario"/>">Usuários</a>
 	<br>
 	<br>
 	<br>
