@@ -6,11 +6,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>NETGIFS - ADM</title>
 </head>
 <body>
-<h1>NETGIFS</h1>
-<h1>FAVORITOS</h1>
+<h1>TODOS OS GIFS</h1>
+	<a href="${pageContext.request.contextPath}/favoritos"> Favoritos</a>
+	<br>
+	<br>
 	<c:forEach var="gif" items="${gifs.gifs}">	
 	<form action=<c:url value="/gif"/> 
 		method="get">

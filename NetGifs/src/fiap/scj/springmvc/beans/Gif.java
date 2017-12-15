@@ -1,13 +1,15 @@
 package fiap.scj.springmvc.beans;
 
+import fiap.scj.springmvc.beans.*;
+
 public class Gif {
 	
 	public String nomeGif = "nomeG";
 	public String desc = "desc";
 	public String clsItr = "12";
 	public String idioma = "english";
-	public Categoria categoria = new Categoria();
-
+	public String categoria;
+//
 //	public String nomeGif;
 //	public String desc ;
 //	public String genero ;
@@ -29,7 +31,7 @@ public class Gif {
 		this.idioma = idioma;
 	}
 	
-	public Gif(String desc,Categoria categoria, String clsItr, String idioma,  String nomeGif) {
+	public Gif(String desc,String categoria, String clsItr, String idioma,  String nomeGif) {
 		super();
 		this.nomeGif = nomeGif;
 		this.categoria = categoria;
@@ -59,14 +61,14 @@ public class Gif {
 	public void setIdioma(String idioma) {
 		this.idioma = idioma;
 	}
-
-	public Categoria getCategoria() {
-		return categoria;
-	}
-
-	public void setCategoria(Categoria categoria) {
-		this.categoria = categoria;
-	}
+	
+		public String getCategoria() {
+			return categoria;
+		}
+	
+		public void setCategoria(String categoria) {
+			this.categoria = categoria;
+		}
 
 	public String getNomeGif() {
 		return nomeGif;

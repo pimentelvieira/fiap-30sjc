@@ -6,15 +6,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import fiap.scj.springmvc.beans.Teste;
 import fiap.scj.springmvc.beans.Usuario;
 
 @Controller
 public class LoginController {
 
 	@RequestMapping(value = "/home", method = RequestMethod.GET)
-	public String exibirAdmFormulario(Model model, Usuario usuario) {
-		model.addAttribute("gifs", usuario);
+	public String exibirAdmFormulario(Model model,Teste teste ) {
+		model.addAttribute("gifs", teste);
 		return "home";
+	}
+	
+	@RequestMapping(value = "/favoritos", method = RequestMethod.GET)
+	public String MostrarFavoritos(Model model,Usuario usuario ) {
+		model.addAttribute("gifs", usuario);
+		return "favoritosForm";
 	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
