@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import br.com.netgifx.dao.GenericDAO;
-import br.com.netgifx.entity.Usuario;
+import fiap.scj.springmvc.beans.Usuario;
+import fiap.scj.springmvc.daos.GenericDAO;
 
 @Controller
 public class UsuarioController {
@@ -37,7 +37,7 @@ public class UsuarioController {
 	}
 	@RequestMapping(value = "/usuario", method = RequestMethod.GET)
 	public String listar(Model model, Usuario usuario) {
-		model.addAttribute("usuario", usuarioDAO.listar());
+		model.addAttribute("usuarios", usuarioDAO.listar());
 		return "usuarios";
 	}
 	@RequestMapping(value = "/usuario/alterar", method = RequestMethod.POST)

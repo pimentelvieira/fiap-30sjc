@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import br.com.netgifx.dao.GenericDAO;
-import br.com.netgifx.entity.Categoria;
+import fiap.scj.springmvc.beans.Categoria;
+import fiap.scj.springmvc.daos.GenericDAO;
 
 @Controller
 public class CategoriaController {
