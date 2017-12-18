@@ -22,8 +22,9 @@ public class LoginFilter implements Filter {
 		
 		HttpServletRequest request = (HttpServletRequest) req;
 		HttpServletResponse response = (HttpServletResponse) resp;
+		System.out.println(request.getRequestURI());
 		
-		if(request.getRequestURI().equals(ALLOWED_PATH)) {
+		if(request.getRequestURI().contains(ALLOWED_PATH)) {
 			chain.doFilter(req, resp);
 		} else {
 			Object user = request.getSession().getAttribute("usrLogado");
