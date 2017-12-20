@@ -1,53 +1,73 @@
 package fiap.scj.springmvc.controllers;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import fiap.scj.springmvc.beans.Teste;
+import fiap.scj.springmvc.beans.Categoria;
+import fiap.scj.springmvc.beans.Gif;
 import fiap.scj.springmvc.beans.Usuario;
+import fiap.scj.springmvc.daos.GenericDAO;
+import fiap.scj.springmvc.daos.UsuarioDAO;
+import fiap.scj.springmvc.util.UsuarioUtil;
 
 @Controller
 public class LoginController {
 
+	UsuarioDAO usuarioDAO = new UsuarioDAO();
+	GenericDAO<Categoria> categoriaDAO = new GenericDAO<>(Categoria.class);
+	
 	@RequestMapping(value = "/home", method = RequestMethod.GET)
-	public String exibirAdmFormulario(Model model,Teste teste ) {
-		model.addAttribute("gifs", teste);
+	public String exibirHome(Model model) {
+		List<Categoria> categorias = categoriaDAO.listar();
+		model.addAttribute("categorias", categorias);
 		return "home";
 	}
-	
-	@RequestMapping(value = "/favoritos", method = RequestMethod.GET)
-	public String MostrarFavoritos(Model model,Usuario usuario ) {
-		model.addAttribute("gifs", usuario);
-		return "favoritosForm";
+	@RequestMapping(value = "/homeAdm", method = RequestMethod.GET)
+	public String exibirHomeAdm(Model model) {
+		List<Categoria> categorias = categoriaDAO.listar();
+		model.addAttribute("categorias", categorias);
+		return "homeAdm";
 	}
-
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String exibirFormulario() {
 		return "formLogin";
 	}
-
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String cadastar(Usuario usuario, Model model, RedirectAttributes attr) {	
-		if (usuario.getLogin().equals("fiap") && usuario.getSenha().equals("fiap")) {
-			System.out.println("login efetuado com sucesso");
-			model.addAttribute("gifs", usuario);
-			return "home";
-		} else {
-			if (usuario.getLogin().equals("fiap") && usuario.getSenha().equals("fiapadm")) {
-				model.addAttribute("gifs", usuario);
+	public String logar(Usuario usuario, Model model, RedirectAttributes attr, HttpServletRequest req) {	
+		Usuario usr = usuarioDAO.buscar(usuario.getLogin(), usuario.getSenha());
+		Set<Gif> gifsFavoritos = new HashSet<>();
+		
+		if(usr != null) {
+			if(UsuarioUtil.isAdmin(usr)) {
 				System.out.println("login ADM efetuado com sucesso");
-				return "formAdm";
+				req.getSession().setAttribute("usrLogado", usr);
+				req.getSession().setAttribute("gifsFavoritos", gifsFavoritos);
+				return "redirect:/homeAdm";
 			} else {
-				model.addAttribute("mensagem", "Usuario ou senha invalidos");
-				System.out.println("Usuario ou senha invalidos");
-				return "formLogin";
+				System.out.println("login efetuado com sucesso");
+				req.getSession().setAttribute("usrLogado", usr);
+				req.getSession().setAttribute("gifsFavoritos", gifsFavoritos);
+				return "redirect:/home";
 			}
-
+			
+		} else {
+			model.addAttribute("mensagem", "Usuário ou senha inválidos");
+			System.out.println("Usuário ou senha inválidos");
+			return "formLogin";
 		}
-
 	}
-
+	@RequestMapping(value = "/nologin", method = RequestMethod.GET)
+	public String noLogin(Model model, HttpServletRequest req) {	
+		model.addAttribute("mensagem", "Nenhum usuário logado");
+		return "formLogin";
+	}
 }

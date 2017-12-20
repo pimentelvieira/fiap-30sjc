@@ -1,22 +1,46 @@
 package fiap.scj.springmvc.beans;
 
-import java.util.ArrayList;
+import java.io.Serializable;
 
-public class Usuario {
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
-	public String login;
-	public String senha;
-	public boolean permissao = true;
+@Entity
+@Table(name="usuario")
+public class Usuario implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 	
-	private ArrayList<Gif> favoritos = new ArrayList<Gif>(){{
-		add(new Gif("desc",  "clsItr", "idioma", "g1"));
-		add(new Gif("desc2",  "clsItr", "idioma", "g2"));
-		add(new Gif("desc3",  "clsItr", "idioma",  "g3"));
-		add(new Gif("desc2",  "clsItr", "idioma",  "g4"));
-		add(new Gif("desc3",  "clsItr", "idioma",  "g5"));
-	}};
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="IDUSUARIO")
+	private int id;
 	
+	@Column(name="NOME")
+	private String nome;
 	
+	@Column(name="LOGIN")
+	private String login;
+	
+	@Column(name="SENHA")
+	private String senha;
+	
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public String getNome() {
+		return nome;
+	}
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
 	public String getLogin() {
 		return login;
 	}
@@ -29,19 +53,4 @@ public class Usuario {
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
-	public ArrayList<Gif> getGifs() {
-		return favoritos;
-	}
-	public void setGifs(ArrayList<Gif> gifs) {
-		this.favoritos = gifs;
-	}
-	public boolean isPermissao() {
-		return permissao;
-	}
-	public void setPermissao(boolean permissao) {
-		this.permissao = permissao;
-	}
-	
-	
-	
 }

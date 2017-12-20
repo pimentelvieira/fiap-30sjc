@@ -1,17 +1,51 @@
 package fiap.scj.springmvc.beans;
 
-public class Categoria {
-	
-	public String nomeCategoria = "Humor";
+import java.io.Serializable;
+import java.util.List;
 
-	public String getNomeCategoria() {
-		return nomeCategoria;
-	}
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
-	public void setNomeCategoria(String nomeCategoria) {
-		this.nomeCategoria = nomeCategoria;
+@Entity
+@Table(name="categoria")
+public class Categoria implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
+	
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="IDCATEGORIA")
+	private int id;
+	
+	@Column(name="NOME")
+	private String nome;
+	
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER, mappedBy="categoria")
+	private List<Gif> gifs;
+	
+	public int getId() {
+		return id;
 	}
-	
-	
-	
+	public void setId(int id) {
+		this.id = id;
+	}
+	public String getNome() {
+		return nome;
+	}
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+	public List<Gif> getGifs() {
+		return gifs;
+	}
+	public void setGifs(List<Gif> gifs) {
+		this.gifs = gifs;
+	}
 }
